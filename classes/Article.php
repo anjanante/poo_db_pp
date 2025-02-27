@@ -61,4 +61,9 @@ class Article {
     {
         $this->date = $date;
     }
+
+    public static function findAll(){
+        $request = Db::connect()->query('SELECT * FROM article');
+        return $request->fetchAll();
+    }
 }
