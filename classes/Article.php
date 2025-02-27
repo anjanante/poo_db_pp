@@ -18,9 +18,9 @@ class Article {
 
     public function __construct($parameters=[])
     {
-        $this->setTitle($parameters['title']);
-        $this->setContent($parameters['content']);
-        $this->setDate($parameters['date']);
+        $this->setTitle($parameters['title'] ?? '');
+        $this->setContent($parameters['content'] ?? '');
+        $this->setDate($parameters['date'] ?? null);
     }
 
     public function getId()
@@ -105,5 +105,11 @@ class Article {
             $attributes[$column] = Db::connect()->quote($this->$column);
         }
         return $attributes;
+    }
+
+    public function delete(int $id)
+    {
+        Db::connect()->prepare('DELETE FROM article WHERE id = ?')->execute([$id]);
+        header('Location: show.php');
     }
 }
