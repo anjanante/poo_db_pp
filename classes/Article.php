@@ -1,6 +1,8 @@
 <?php
 namespace Classes;
 
+use PDO;
+
 class Article {
     private $id;
 
@@ -64,6 +66,6 @@ class Article {
 
     public static function findAll(){
         $request = Db::connect()->query('SELECT * FROM article');
-        return $request->fetchAll();
+        return $request->fetchAll(PDO::FETCH_OBJ);
     }
 }

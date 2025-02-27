@@ -17,12 +17,14 @@ require_once INCLUDES_ROOT.'/header.php';
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">#</th>
-      <td>MARK</td>
-      <td>Otto</td>
-      <td>twitter</td>
-    </tr>
+    <?php foreach ($articles as $article) { ?>
+        <tr>
+        <th scope="row"><?= $article->id; ?></th>
+        <td><?= $article->title; ?></td>
+        <td><?= $article->content; ?></td>
+        <td><?= $article->date; ?></td>
+        </tr>
+    <?php } ?>
   </tbody>
 </table>
 
