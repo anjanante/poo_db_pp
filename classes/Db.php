@@ -1,5 +1,7 @@
 <?php
 
+namespace Classes;
+
 class Db {
 
     public static $host = "localhost";
@@ -17,18 +19,16 @@ class Db {
 
         try {
 
-            $connexion = new PDO('mysql:host='.self::$host.';port='.self::$port.';dbname='.self::$db_name.'', self::$user, self::$password);
+            $connexion = new \PDO('mysql:host='.self::$host.';port='.self::$port.';dbname='.self::$db_name.'', self::$user, self::$password);
              
-            $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $connexion->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
          
             return $connexion;
 
-        } catch(PDOException $e)
+        } catch(\PDOException $e)
         {
             echo "An error has occurred during connection :".$e->getMessage();
         }
 
     }
 }
-
-print_r(Db::connect());
