@@ -68,4 +68,10 @@ class Article {
         $request = Db::connect()->query('SELECT * FROM article');
         return $request->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public static function findById(int $id){
+        $request = Db::connect()->prepare('SELECT * FROM article where id = ?');
+        $request->execute([$id]);
+        return $request->fetch(PDO::FETCH_OBJ);
+    }
 }
