@@ -89,9 +89,9 @@ class Article {
         $attributes = $this->attributes();
         $sql = "INSERT INTO article (";
         $sql .= join(',', self::$db_columns);
-        $sql .= ") VALUES ('";
-        $sql .= join("','", array_values($attributes));
-        $sql .="')";
+        $sql .= ") VALUES (";
+        $sql .= join(",", array_values($attributes));
+        $sql .= ")";
 
         $connexion = Db::connect()->query($sql);
         $connexion->fetch();
@@ -102,7 +102,7 @@ class Article {
         $attributes = [];
         foreach(self::$db_columns as $column)
         {
-            $attributes[$column] = $this->$column;
+            $attributes[$column] = Db::connect()->quote($this->$column);
         }
         return $attributes;
     }
