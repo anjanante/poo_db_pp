@@ -7,5 +7,3 @@ define('INCLUDES_ROOT', PROJET_ROOT.'/includes');
 define('VENDOR_ROOT', PROJET_ROOT.'/vendor');
 
 require_once(VENDOR_ROOT.'/autoload.php');
-
-print_r(Classes\Db::connect());

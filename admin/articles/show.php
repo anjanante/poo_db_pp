@@ -25,7 +25,7 @@ require_once INCLUDES_ROOT.'/header.php';
         <td><?= $article->content; ?></td>
         <td><?= $article->date; ?></td>
         <td class="col-4">
-            <a href="" class="btn btn-warning">Update</a>
+            <a href="modify.php?id=<?php echo $article->id; ?>" class="btn btn-warning">Update</a>
             <a href="delete.php?id=<?php echo $article->id; ?>" class="btn btn-danger">Delete</a></td>
         </tr>
     <?php } ?>

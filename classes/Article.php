@@ -112,4 +112,30 @@ class Article {
         Db::connect()->prepare('DELETE FROM article WHERE id = ?')->execute([$id]);
         header('Location: show.php');
     }
+
+    public function merge_attributes(array $args=[])
+    {
+        foreach($args as $key => $value)
+        {
+            if(property_exists($this, $key) && !is_null($value)){
+                $this->$key = $value;
+            }
+        }
+    }
+
+    public function update(int $id) {
+        $attributes = $this->attributes();
+        $attribute_pairs = [];
+        foreach($attributes as $key => $value){
+            $attribute_pairs[] = "{$key}={$value}";
+        }
+
+
+        $sql = "UPDATE article SET ";
+        $sql .= join(',', $attribute_pairs);
+        $sql .= " WHERE id =". Db::connect()->quote($id);
+
+        $connexion = Db::connect()->query($sql);
+        $connexion->fetch();
+    }
 }
