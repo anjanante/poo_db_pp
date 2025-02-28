@@ -14,6 +14,8 @@ class Article {
 
     private $date;
 
+    public $errors;
+
     protected static $db_columns =  ['title','content','date'];
 
     public function __construct($parameters=[])
@@ -86,6 +88,9 @@ class Article {
 
     public function save()
     {
+        if(!empty($this->validation())){ 
+            return false; 
+        }
         $attributes = $this->attributes();
         $sql = "INSERT INTO article (";
         $sql .= join(',', self::$db_columns);
@@ -137,5 +142,40 @@ class Article {
 
         $connexion = Db::connect()->query($sql);
         $connexion->fetch();
+    }
+
+    public function validation()
+    {
+
+        $this->errors = [];
+
+        if(empty($this->title)){
+            $this->errors[] = 'The title is empty';
+        }
+
+        if(empty($this->content)){
+            $this->errors[] = 'The content is empty';
+        }
+
+        if(empty($this->date)){
+            $this->errors[] = 'The date is empty';
+        }
+
+        if(!is_string($this->title))
+        {
+            $this->errors[] = 'Invalid title';
+        }
+
+        if(!is_string($this->content))
+        {
+            $this->errors[] = 'Invalid content';
+        }
+
+        if (\DateTime::createFromFormat('Y-m-d H:i:s', $this->date) == true) {
+            $this->errors[] = 'Invalid date';
+          }
+          
+        return $this->errors;
+
     }
 }

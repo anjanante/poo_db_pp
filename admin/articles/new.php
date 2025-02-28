@@ -15,7 +15,16 @@ if(!empty($_POST)){
 
     $article = new Article($parameters);
     $article->save();
+}
 
+if(isset($article->errors))
+{
+  foreach($article->errors as $error)
+  {
+    echo '<div class="alert alert-danger" role="alert">';
+    echo $error;
+    echo '</div>';
+  }
 }
 ?>
 <form action="#" method="POST">

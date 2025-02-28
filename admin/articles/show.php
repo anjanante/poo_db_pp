@@ -31,6 +31,7 @@ require_once INCLUDES_ROOT.'/header.php';
     <?php } ?>
   </tbody>
 </table>
+<a href="new.php" class="btn btn-primary">New</a>
 
 
 
