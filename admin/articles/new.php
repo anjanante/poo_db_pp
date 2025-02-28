@@ -14,7 +14,9 @@ if(!empty($_POST)){
     $parameters['date'] = ($_POST['date'])? $_POST['date'] : null;
 
     $article = new Article($parameters);
-    $article->save();
+    if($article->save()){
+        header('Location: show.php');
+    }
 }
 
 if(isset($article->errors))
