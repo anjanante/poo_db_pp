@@ -89,7 +89,7 @@ class user  extends ObjectModel {
                 $session = new Session();
                 $session->login($user);
 
-                header("Location: user/show.php");
+                header("Location: users/show.php");
                 exit;
             }
         }
