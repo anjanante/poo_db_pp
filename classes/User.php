@@ -76,4 +76,21 @@ class user  extends ObjectModel {
         }
         return $this->errors;
     }
+
+    public static function userConnect()
+    {
+        $requete = Db::connect()->prepare("SELECT * FROM user WHERE email = ?");
+        $requete->execute([$_POST['email']]);
+        $user = $requete->fetch(\PDO::FETCH_OBJ);
+
+        if($user) {
+            if(password_verify($_POST['password'], $user->password))
+            {
+                $_SESSION['user_id'] = $user->id;
+
+                header("Location: user/show.php");
+                exit;
+            }
+        }
+    }
 }
