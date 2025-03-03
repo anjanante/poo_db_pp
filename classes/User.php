@@ -86,7 +86,8 @@ class user  extends ObjectModel {
         if($user) {
             if(password_verify($_POST['password'], $user->password))
             {
-                $_SESSION['user_id'] = $user->id;
+                $session = new Session();
+                $session->login($user);
 
                 header("Location: user/show.php");
                 exit;

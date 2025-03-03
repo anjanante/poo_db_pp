@@ -5,6 +5,7 @@ $users = User::findAll();
 
 $title ="list of users";
 require_once INCLUDES_ROOT.'/header.php';
+
 ?>
 
 <table class="table">
