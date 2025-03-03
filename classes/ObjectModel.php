@@ -60,7 +60,7 @@ class ObjectModel {
         return $attributes;
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         Db::connect()->prepare("DELETE FROM ".static::$table_name." WHERE id = ?")->execute([$id]);
         header('Location: show.php');
@@ -76,7 +76,7 @@ class ObjectModel {
         }
     }
 
-    public function update($id) {
+    public function update(int $id) {
         $attributes = $this->attributes();
         $attribute_pairs = [];
         foreach($attributes as $key => $value){

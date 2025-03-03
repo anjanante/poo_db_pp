@@ -1,64 +1,51 @@
 <?php
 namespace Classes;
 
-class user {
-    private $id;
+class user  extends ObjectModel {
 
-    private $firstname;
+    public $id;
 
-    private $lastname;
+    public $firstname;
 
-    private $email;
+    public $lastname;
 
-    private $password;
+    public $email;
 
-    public function getId()
+    public $password;
+
+    public $errors;
+    
+
+    protected static $table_name = 'user';
+    protected static $db_columns =  ['firstname','lastname','email','password'];
+
+    public function __construct($parameters=[])
     {
-        return $this->id;
+        $this->firstname = $parameters['firstname'];
+        $this->lastname = $parameters['lastname'];
+        $this->email = $parameters['email'];
+        $this->password = $parameters['password'];
     }
 
-    public function setId($id)
+    public function setPassword()
     {
-        $this->id = $id;
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function getFirstname()
+    public function save()
     {
-        return $this->firstname;
+        $this->setPassword();
+        parent::save();
     }
 
-    public function setFirstname($firstname)
+    public function update(int $id)
     {
-        $this->firstname = $firstname;
+        $this->setPassword();
+        parent::update($id);
     }
 
-    public function getLastname()
+    public function validation()
     {
-        return $this->lastname;
-    }
 
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
     }
 }
