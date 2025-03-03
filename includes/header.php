@@ -9,14 +9,18 @@
 <body>
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+  <h5 class="my-0 mr-md-auto font-weight-normal">MyCompany</h5>
+  <?php if($session->isLoggedIn()){ ?>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="#">Features</a>
-    <a class="p-2 text-dark" href="#">Enterprise</a>
-    <a class="p-2 text-dark" href="#">Support</a>
-    <a class="p-2 text-dark" href="#">Pricing</a>
+    <a class="p-2 text-dark" href="/../admin/articles/show.php">Articles</a>
+    <a class="p-2 text-dark" href="/../admin/users/show.php">Users</a>
   </nav>
-  <a class="btn btn-outline-primary" href="#">Sign up</a>
+  <?php }  ?>
+  <?php if($session->isLoggedIn()){ ?>
+  <a class="btn btn-outline-danger" href="/../admin/logout.php">Logout</a>
+  <?php }else{ ?>
+  <a class="btn btn-outline-primary" href="/../admin/login.php">Login</a>
+  <?php } ?>
 </div>
 
 <div class="container">
