@@ -91,4 +91,9 @@ class ObjectModel {
         $connexion = Db::connect()->query($sql);
         $connexion->fetch();
     }
+
+    public function validation(){
+        $this->errors = [];
+        return $this->errors;
+    }
 }

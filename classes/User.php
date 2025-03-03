@@ -46,6 +46,34 @@ class user  extends ObjectModel {
 
     public function validation()
     {
+        $this->errors = [];
 
+        if(empty($this->firstname)){
+            $this->errors[] = 'Firstname is empty';
+        }
+
+        if(empty($this->lastname)){
+            $this->errors[] = 'Lastname is empty';
+        }
+
+        if(empty($this->email))
+        {
+            $this->errors[] = 'Email is empty';
+        }
+
+        if(empty($this->password))
+        {
+            $this->errors[] = 'Password is empty';
+        }
+
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) == false) {
+            $this->errors[] = 'Please check email.';
+        }
+
+        if(strlen($this->password ) < 5)
+        {
+            $this->errors[] = 'Password must have at least 5 chars';
+        }
+        return $this->errors;
     }
 }
